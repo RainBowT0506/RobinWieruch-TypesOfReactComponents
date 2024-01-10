@@ -9,9 +9,9 @@ class App extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange(event) {
+  onChange = (event) => {
     this.setState({ value: event.target.value });
-  }
+  };
 
   render() {
     return (
