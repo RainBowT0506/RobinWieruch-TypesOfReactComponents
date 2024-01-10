@@ -1,35 +1,27 @@
-function getLocalStorageMixin(localStorageKey) {
-  return {
-    getInitialState: function () {
-      return { value: localStorage.getItem(localStorageKey) || "" };
-    },
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-    setLocalStorage: function (value) {
-      localStorage.setItem(localStorageKey, value);
-    },
-  };
-}
+    this.state = {
+      value: "",
+    };
 
-var App = React.createClass({
-  mixins: [getLocalStorageMixin("myValueInLocalStorage")],
+    this.onChange = this.onChange.bind(this);
+  }
 
-  componentDidUpdate: function () {
-    this.setLocalStorage(this.state.value);
-  },
-
-  onChange: function (event) {
+  onChange(event) {
     this.setState({ value: event.target.value });
-  },
+  }
 
-  render: function () {
+  render() {
     return (
       <div>
-        <h1>Hello React "createClass" Component with Mixin!</h1>
+        <h1>Hello React ES6 Class Component!</h1>
 
         <input value={this.state.value} type="text" onChange={this.onChange} />
 
         <p>{this.state.value}</p>
       </div>
     );
-  },
-});
+  }
+}
