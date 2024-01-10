@@ -1,11 +1,17 @@
-const App = () => {
+const useStateWithLocalStorage = (localStorageKey) => {
   const [value, setValue] = React.useState(
-    localStorage.getItem("myValueInLocalStorage") || ""
+    localStorage.getItem(localStorageKey) || ""
   );
 
   React.useEffect(() => {
-    localStorage.setItem("myValueInLocalStorage", value);
+    localStorage.setItem(localStorageKey, value);
   }, [value]);
+
+  return [value, setValue];
+};
+
+const App = () => {
+  const [value, setValue] = useStateWithLocalStorage("myValueInLocalStorage");
 
   const onChange = (event) => setValue(event.target.value);
 
