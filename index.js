@@ -1,5 +1,11 @@
 const App = () => {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState(
+    localStorage.getItem("myValueInLocalStorage") || ""
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem("myValueInLocalStorage", value);
+  }, [value]);
 
   const onChange = (event) => setValue(event.target.value);
 
