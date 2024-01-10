@@ -1,17 +1,17 @@
-var localStorageMixin = {
-  getInitialState: function () {
-    return {
-      value: localStorage.getItem("myValueInLocalStorage") || "",
-    };
-  },
+function getLocalStorageMixin(localStorageKey) {
+  return {
+    getInitialState: function () {
+      return { value: localStorage.getItem(localStorageKey) || "" };
+    },
 
-  setLocalStorage: function (value) {
-    localStorage.setItem("myValueInLocalStorage", value);
-  },
-};
+    setLocalStorage: function (value) {
+      localStorage.setItem(localStorageKey, value);
+    },
+  };
+}
 
 var App = React.createClass({
-  mixins: [localStorageMixin],
+  mixins: [getLocalStorageMixin("myValueInLocalStorage")],
 
   componentDidUpdate: function () {
     this.setLocalStorage(this.state.value);
