@@ -1,54 +1,15 @@
-const withLocalStorage = (localStorageKey) => (Component) =>
-  class WithLocalStorage extends React.Component {
-    constructor(props) {
-      super(props);
+const App = () => {
+  const [value, setValue] = React.useState("");
 
-      this.state = {
-        [localStorageKey]: localStorage.getItem(localStorageKey),
-      };
-    }
+  const onChange = (event) => setValue(event.target.value);
 
-    setLocalStorage = (value) => {
-      localStorage.setItem(localStorageKey, value);
-    };
+  return (
+    <div>
+      <h1>Hello React Function Component!</h1>
 
-    render() {
-      return (
-        <Component
-          {...this.state}
-          {...this.props}
-          setLocalStorage={this.setLocalStorage}
-        />
-      );
-    }
-  };
+      <input value={value} type="text" onChange={onChange} />
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { value: this.props["myValueInLocalStorage"] || "" };
-  }
-
-  componentDidUpdate() {
-    this.props.setLocalStorage(this.state.value);
-  }
-
-  onChange = (event) => {
-    this.setState({ value: event.target.value });
-  };
-
-  render() {
-    return (
-      <div>
-        <h1>Hello React ES6 Class Component with Higher-Order Component!</h1>
-
-        <input value={this.state.value} type="text" onChange={this.onChange} />
-
-        <p>{this.state.value}</p>
-      </div>
-    );
-  }
-}
-
-const AppWithLocalStorage = withLocalStorage("myValueInLocalStorage")(App);
+      <p>{value}</p>
+    </div>
+  );
+};
