@@ -3,10 +3,12 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      value: "",
+      value: localStorage.getItem("myValueInLocalStorage") || "",
     };
+  }
 
-    this.onChange = this.onChange.bind(this);
+  componentDidUpdate() {
+    localStorage.setItem("myValueInLocalStorage", this.state.value);
   }
 
   onChange = (event) => {
