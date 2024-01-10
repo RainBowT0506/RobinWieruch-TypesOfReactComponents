@@ -1,27 +1,27 @@
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: "",
+var App = React.createClass({
+  getInitialState: function () {
+    return {
+      value: localStorage.getItem("myValueInLocalStorage") || "",
     };
+  },
 
-    this.onChange = this.onChange.bind(this);
-  }
+  componentDidUpdate: function () {
+    localStorage.setItem("myValueInLocalStorage", this.state.value);
+  },
 
-  onChange(event) {
+  onChange: function (event) {
     this.setState({ value: event.target.value });
-  }
+  },
 
-  render() {
+  render: function () {
     return (
       <div>
-        <h1>Hello React ES6 Class Component!</h1>
+        <h1>Hello React "createClass" Component!</h1>
 
         <input value={this.state.value} type="text" onChange={this.onChange} />
 
         <p>{this.state.value}</p>
       </div>
     );
-  }
-}
+  },
+});
